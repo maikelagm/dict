@@ -5,10 +5,10 @@ import type {
 } from "next-auth";
 import { skipCSRFCheck } from "@auth/core";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import Discord from "next-auth/providers/discord";
+import Google from "next-auth/providers/google";
 
-import { db } from "@acme/db/client";
-import { Account, Session, User } from "@acme/db/schema";
+import { db } from "@dict/db/client";
+import { Account, Session, User } from "@dict/db/schema";
 
 import { env } from "../env";
 
@@ -38,7 +38,7 @@ export const authConfig = {
       }
     : {}),
   secret: env.AUTH_SECRET,
-  providers: [Discord],
+  providers: [Google],
   callbacks: {
     session: (opts) => {
       if (!("user" in opts))

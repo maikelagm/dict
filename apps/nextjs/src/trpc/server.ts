@@ -2,9 +2,9 @@ import { cache } from "react";
 import { headers } from "next/headers";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
 
-import type { AppRouter } from "@acme/api";
-import { createCaller, createTRPCContext } from "@acme/api";
-import { auth } from "@acme/auth";
+import type { AppRouter } from "@dict/api";
+import { createCaller, createTRPCContext } from "@dict/api";
+import { auth } from "@dict/auth";
 
 import { createQueryClient } from "./query-client";
 

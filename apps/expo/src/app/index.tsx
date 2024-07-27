@@ -107,7 +107,7 @@ function MobileAuth() {
       </Text>
       <Button
         onPress={() => (user ? signOut() : signIn())}
-        title={user ? "Sign Out" : "Sign In With Discord"}
+        title={user ? "Sign Out" : "Sign In With Google"}
         color={"#5B65E9"}
       />
     </>
@@ -140,6 +140,8 @@ export default function Index() {
           </Text>
         </View>
 
+        {/* [ ] En este fragmento se esta leyendo una propiedad undefined, la app expo inicia al comentarlo
+        
         <FlashList
           data={postQuery.data}
           estimatedItemSize={20}
@@ -150,7 +152,7 @@ export default function Index() {
               onDelete={() => deletePostMutation.mutate(p.item.id)}
             />
           )}
-        />
+        /> */}
 
         <CreatePost />
       </View>
