@@ -1,0 +1,6 @@
+{
+  "extends": "@dict/tsconfig/internal-package.json",
+  "compilerOptions": {},
+  "include": ["*.ts", "client"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@dict/supabase",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./client": "./client/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf .turbo node_modules",
+    "dev": "tsc",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "start": "cd server && supabase start -x vector edge-runtime",
+    "stop": "cd server && supabase stop"
+  },
+  "devDependencies": {
+    "@dict/eslint-config": "workspace:*",
+    "@dict/prettier-config": "workspace:*",
+    "@dict/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@dict/prettier-config",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}
