@@ -1,11 +1,18 @@
-export { auth as middleware } from "@dict/auth";
+import type { NextRequest } from "next/server";
 
-// Or like this if you need to do something here.
-// export default auth((req) => {
-//   console.log(req.auth) //  { session: { user: { ... } } }
-// })
+export function middleware(request: NextRequest) {
+  console.log(request.url);
+}
 
-// Read more: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
+/**
+ * @maikelagm
+ * Usar una conexión directa a la base de datos postgres dentro del middleware
+ * no es posible hasta el momento, el tiempo de ejecución Edge no admite
+ * conexiones directas a postgres. Por lo que usar NextAuth middleware con la
+ * strategia de sessión de base de datos falla.
+ */
+
+// Clerk config
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
