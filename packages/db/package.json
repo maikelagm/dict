@@ -5,22 +5,23 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
     },
     "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
+      "types": "./dist/src/client.d.ts",
+      "default": "./dist/src/client.js"
     },
     "./schema": {
-      "types": "./dist/schema.d.ts",
-      "default": "./dist/schema.js"
-    }
+      "types": "./dist/src/schema.d.ts",
+      "default": "./dist/src/schema.js"
+    },
+    "./env": "./env.ts"
   },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc",
+    "dev": "tsc --watch",
     "clean": "rm -rf .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
@@ -31,6 +32,7 @@
   },
   "dependencies": {
     "@t3-oss/env-core": "^0.10.1",
+    "@t3-oss/env-nextjs": "^0.10.1",
     "@vercel/postgres": "^0.9.0",
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",

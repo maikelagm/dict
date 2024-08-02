@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { drizzle } from "drizzle-orm/postgres-js";
+import { drizzle as PostgresDrizzle } from "drizzle-orm/postgres-js";
 import { drizzle as VercelDrizzle } from "drizzle-orm/vercel-postgres";
 import postgres from "postgres";
 
@@ -31,6 +31,6 @@ const url = new URL(env.POSTGRES_URL);
 const db =
   url.searchParams.get("workaround") === "supabase-pooler.vercel"
     ? VercelDrizzle(sql, { schema })
-    : drizzle(postgres(env.POSTGRES_URL), { schema });
+    : PostgresDrizzle(postgres(env.POSTGRES_URL), { schema });
 
 export { db };
