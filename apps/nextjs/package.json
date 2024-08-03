@@ -36,6 +36,7 @@
     "@dict/prettier-config": "workspace:*",
     "@dict/tailwind-config": "workspace:*",
     "@dict/tsconfig": "workspace:*",
+    "@next/bundle-analyzer": "^14.2.5",
     "@types/node": "^20.14.9",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
