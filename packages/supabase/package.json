@@ -4,13 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    "./client": "./client/index.ts"
+    "./client": "./dist/index.ts"
   },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf .turbo node_modules",
-    "dev": "tsc",
+    "dev": "cd ./server && supabase status && cd ../ && tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
