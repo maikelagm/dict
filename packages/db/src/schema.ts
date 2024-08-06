@@ -78,6 +78,9 @@ export const AccountRelations = relations(Account, ({ one }) => ({
 
 export const Session = pgTable("session", {
   sessionToken: varchar("sessionToken", { length: 255 }).notNull().primaryKey(),
+  currentProvider: varchar("currentProvider", {
+    length: 255,
+  }).default("google"),
   userId: uuid("userId")
     .notNull()
     .references(() => User.id, { onDelete: "cascade" }),

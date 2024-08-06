@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
-import { handlers, isSecureContext } from "@dict/auth";
+import { auth, handlers, isSecureContext, signIn } from "@dict/auth";
 
 // export const runtime = "edge";
 
@@ -35,6 +36,26 @@ export const GET = async (
   _req: NextRequest,
   props: { params: { nextauth: string[] } },
 ) => {
+  if (_req.nextUrl.pathname === "/api/auth/callback/cas") {
+    const session = await auth();
+    const ticket = _req.nextUrl.searchParams.get("ticket");
+    const callback_url = cookies().get("authjs.callback-url");
+    const url = callback_url?.value;
+    const serviceURL = `${process.env.NEXT_URL}/api/auth/callback/cas`;
+    const casLoginURL = `https://soa-cas.uci.cu/cas/login?service=${encodeURIComponent(
+      serviceURL,
+    )}`;
+
+    if (!session) {
+      try {
+        await signIn("cas", { ticket });
+      } catch (error) {
+        redirect(casLoginURL);
+      }
+    } else {
+      redirect(url as string);
+    }
+  }
   // First step must be to correct the request URL.
   const req = rewriteRequestUrlInDevelopment(_req);
 
