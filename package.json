@@ -22,7 +22,9 @@
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add",
     "supabase:start": "turbo -F @dict/supabase start",
-    "supabase:stop": "turbo -F @dict/supabase stop"
+    "supabase:stop": "turbo -F @dict/supabase stop",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch"
   },
   "devDependencies": {
     "@dict/prettier-config": "workspace:*",
