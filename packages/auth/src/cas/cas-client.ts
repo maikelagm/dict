@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import Credentials from "@auth/core/providers/credentials";
 
 import { extendUserObject } from "./users";
@@ -15,7 +16,10 @@ export const CAS = Credentials({
   authorize: async (credentials) => {
     const ticket = credentials?.ticket;
     if (ticket) {
-      const user = await validateTicket(ticket);
+      const user = await validateTicket({
+        ticket,
+        serviceURL: `${headers().get("x-forwarded-proto") + "://" + headers().get("host")}/api/auth/callback/cas`,
+      });
       if (user) {
         const extendedUser = await extendUserObject(user);
         return extendedUser;
@@ -28,14 +32,18 @@ export const CAS = Credentials({
   },
 });
 
-export async function validateTicket(ticket: any) {
-  const serviceUrl = encodeURIComponent(
-    `${process.env.NEXT_URL}/api/auth/callback/cas`,
-  );
-  const casUrl = `https://soa-cas.uci.cu/cas/serviceValidate?service=${serviceUrl}&ticket=${ticket}`;
+export async function validateTicket({
+  ticket,
+  serviceURL,
+}: {
+  ticket: any;
+  serviceURL: string;
+}): Promise<{ id: string } | null> {
+  const encodeServiceURL = encodeURIComponent(serviceURL);
+  const casURL = `https://soa-cas.uci.cu/cas/serviceValidate?service=${encodeServiceURL}&ticket=${ticket}`;
 
   try {
-    const response = await fetch(casUrl);
+    const response = await fetch(casURL);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -48,10 +56,15 @@ export async function validateTicket(ticket: any) {
         id: user,
       };
     } else {
-      return null;
+      throw new Error(`${text}`);
     }
   } catch (error) {
     console.error("Error validating CAS ticket:", error);
+    console.log({
+      serviceURL,
+      encodeServiceURL,
+      casURL,
+    });
     return null;
   }
 }

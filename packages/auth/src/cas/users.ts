@@ -1,3 +1,5 @@
+import { headers } from "next/headers";
+
 interface User {
   name: string;
   lastnames: string;
@@ -31,7 +33,7 @@ export async function extendUserObject(
       role: "Estudiante",
       area: "Facultad 2",
       apto: "Apto 135305",
-      image: `${process.env.NEXT_URL}/assets/avatars/maikelagm.png`,
+      image: `${headers().get("x-forwarded-proto") + "://" + headers().get("host")}/assets/avatars/maikelagm.png`,
     },
     olayad: {
       name: "Olaya Deysis",
@@ -40,7 +42,7 @@ export async function extendUserObject(
       role: "Estudiante",
       area: "Facultad 1",
       apto: "Apto 109101",
-      image: `${process.env.NEXT_URL}/assets/avatars/olayad.png`,
+      image: `${headers().get("x-forwarded-proto") + "://" + headers().get("host")}/assets/avatars/olayad.png`,
     },
   };
 

@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -41,7 +41,7 @@ export const GET = async (
     const ticket = _req.nextUrl.searchParams.get("ticket");
     const callback_url = cookies().get("authjs.callback-url");
     const url = callback_url?.value;
-    const serviceURL = `${process.env.NEXT_URL}/api/auth/callback/cas`;
+    const serviceURL = `${headers().get("x-forwarded-proto") + "://" + headers().get("host")}/api/auth/callback/cas`;
     const casLoginURL = `https://soa-cas.uci.cu/cas/login?service=${encodeURIComponent(
       serviceURL,
     )}`;
