@@ -24,7 +24,9 @@
     "supabase:start": "turbo -F @dict/supabase start",
     "supabase:stop": "turbo -F @dict/supabase stop",
     "test": "turbo run test",
-    "test:watch": "turbo run test:watch"
+    "test:watch": "turbo run test:watch",
+    "preview": "pnpm build && turbo run start",
+    "preview:next": "pnpm build && turbo run start -F @dict/nextjs..."
   },
   "devDependencies": {
     "@dict/prettier-config": "workspace:*",

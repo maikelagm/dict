@@ -41,7 +41,10 @@ export const authConfig = {
         skipCSRFCheck: skipCSRFCheck,
         trustHost: true,
       }
-    : {}),
+    : {
+        //  en Preview es necesario trusHost
+        trustHost: true,
+      }),
   secret: env.AUTH_SECRET,
   providers: [
     Google({
