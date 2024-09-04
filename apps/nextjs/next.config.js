@@ -23,7 +23,6 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
 };
 
-console.log(process.env.NEXT_BUNDLE_ANALYZER);
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.NEXT_BUNDLE_ANALYZER === "true",
 });
