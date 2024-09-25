@@ -46,6 +46,9 @@ export async function extendUserObject(
     },
   };
 
+  // Simula una demora de 300ms
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
   const userData = exampleUsersData[user.id];
 
   if (userData) {

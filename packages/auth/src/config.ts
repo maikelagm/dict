@@ -1,5 +1,5 @@
 import type {
-  DefaultSession,
+  // DefaultSession,
   NextAuthConfig,
   Session as NextAuthSession,
 } from "next-auth";
@@ -16,14 +16,14 @@ import { env } from "../env";
 import { createCasSession, syncCasUserAccount } from "./cas/cas-authjs";
 import { CAS } from "./cas/cas-client";
 
-declare module "next-auth" {
-  interface Session {
-    currentProvider: string;
-    user: {
-      id: string;
-    } & DefaultSession["user"];
-  }
-}
+// declare module "next-auth" {
+//   interface Session {
+//     currentProvider: string;
+//     user: {
+//       id: string;
+//     } & DefaultSession["user"];
+//   }
+// }
 
 const adapter = DrizzleAdapter(db, {
   usersTable: User,
@@ -60,8 +60,8 @@ export const authConfig = {
   ],
   jwt: {
     maxAge: 60 * 60 * 24 * 30,
-    async encode(arg) {
-      return (arg.token?.sessionId as string) ?? encode(arg);
+    encode(arg) {
+      return (arg.token?.sessionId as string | undefined) ?? encode(arg);
     },
   },
   callbacks: {
@@ -82,13 +82,13 @@ export const authConfig = {
           token,
           adapter,
         });
+        token.provider = account.provider;
       }
       return token;
     },
     session: (opts) => {
       if (!("user" in opts))
         throw new Error("unreachable with session strategy");
-
       return {
         ...opts.session,
         user: {
@@ -110,7 +110,7 @@ export const authConfig = {
       if ("session" in message && message.session?.sessionToken) {
         await db
           .delete(Session)
-          .where(eq(Session.sessionToken, message.session?.sessionToken));
+          .where(eq(Session.sessionToken, message.session.sessionToken));
       }
     },
   },
@@ -123,8 +123,7 @@ export const validateToken = async (
   const session = await adapter.getSessionAndUser?.(sessionToken);
   return session
     ? {
-        //@ts-ignore
-        currentProvider: session.currentProvider,
+        // [ ] currentProvider: session.currentProvider,
         user: {
           ...session.user,
         },
