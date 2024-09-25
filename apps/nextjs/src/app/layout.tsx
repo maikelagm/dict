@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { TRPCReactProvider } from "@/trpc/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import { cn } from "@dict/ui";
 import { ThemeProvider, ThemeToggle } from "@dict/ui/theme";
 import { Toaster } from "@dict/ui/toast";
+
+import { TRPCReactProvider } from "@/trpc/react";
 
 import "@/app/globals.css";
 

@@ -1,7 +1,5 @@
 "use client";
 
-import { api } from "@/trpc/react";
-
 import type { RouterOutputs } from "@dict/api";
 import { CreatePostSchema } from "@dict/db/schema";
 import { cn } from "@dict/ui";
@@ -16,6 +14,8 @@ import {
 } from "@dict/ui/form";
 import { Input } from "@dict/ui/input";
 import { toast } from "@dict/ui/toast";
+
+import { api } from "@/trpc/react";
 
 export function CreatePostForm() {
   const form = useForm({
