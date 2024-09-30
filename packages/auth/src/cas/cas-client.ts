@@ -14,8 +14,8 @@ export const CAS = Credentials({
     },
   },
   authorize: async (credentials) => {
-    const ticket = credentials?.ticket;
-    if (ticket) {
+    const ticket = credentials.ticket;
+    if (typeof ticket === "string") {
       const user = await validateTicket({
         ticket,
         serviceURL: `${headers().get("x-forwarded-proto") + "://" + headers().get("host")}/api/auth/callback/cas`,
@@ -36,9 +36,12 @@ export async function validateTicket({
   ticket,
   serviceURL,
 }: {
-  ticket: any;
+  ticket?: string;
   serviceURL: string;
 }): Promise<{ id: string } | null> {
+  if (!ticket) {
+    return null;
+  }
   const encodeServiceURL = encodeURIComponent(serviceURL);
   const casURL = `https://soa-cas.uci.cu/cas/serviceValidate?service=${encodeServiceURL}&ticket=${ticket}`;
 
@@ -71,6 +74,6 @@ export async function validateTicket({
 
 function parseCASResponse(response: string) {
   const regex = /<cas:user>([^<]+)<\/cas:user>/;
-  const match = response.match(regex);
+  const match = regex.exec(response);
   return match ? match[1] : null;
 }

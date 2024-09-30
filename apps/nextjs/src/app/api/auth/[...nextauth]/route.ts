@@ -49,11 +49,13 @@ export const GET = async (
     if (!session) {
       try {
         await signIn("cas", { ticket });
-      } catch (error) {
+      } catch {
         redirect(casLoginURL);
       }
     } else {
-      redirect(url as string);
+      if (url) {
+        redirect(url);
+      }
     }
   }
   // First step must be to correct the request URL.
