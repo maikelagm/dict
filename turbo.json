@@ -17,7 +17,7 @@
         "^build"
       ],
       "outputs": [
-        "node_modules/.cache/tsbuildinfo.json",
+        ".cache/tsbuildinfo.json",
         "dist/**"
       ]
     },
@@ -27,7 +27,7 @@
     },
     "format": {
       "outputs": [
-        "node_modules/.cache/.prettiercache"
+        ".cache/.prettiercache"
       ],
       "outputLogs": "new-only"
     },
@@ -37,7 +37,7 @@
         "^build"
       ],
       "outputs": [
-        "node_modules/.cache/.eslintcache"
+        ".cache/.eslintcache"
       ]
     },
     "typecheck": {
@@ -46,7 +46,7 @@
         "^build"
       ],
       "outputs": [
-        "node_modules/.cache/tsbuildinfo.json"
+        ".cache/tsbuildinfo.json"
       ]
     },
     "clean": {

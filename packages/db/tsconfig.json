@@ -1,6 +1,8 @@
 {
   "extends": "@dict/tsconfig/internal-package.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    "emitDeclarationOnly": false
+  },
   "include": ["src", "*.ts"],
   "exclude": ["node_modules"]
 }

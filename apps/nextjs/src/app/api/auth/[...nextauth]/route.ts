@@ -6,7 +6,7 @@ import { auth, handlers, isSecureContext, signIn } from "@dict/auth";
 
 // export const runtime = "edge";
 
-const EXPO_COOKIE_NAME = "__acme-expo-redirect-state";
+const EXPO_COOKIE_NAME = "__dict-expo-redirect-state";
 const AUTH_COOKIE_PATTERN = /authjs\.session-token=([^;]+)/;
 
 /**

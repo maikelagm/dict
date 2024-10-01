@@ -1,5 +1,5 @@
 {
-  "name": "@dict/{{ name }}",
+  "name": "@dict/{{name}}",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,11 +9,11 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
     "@dict/eslint-config": "workspace:*",

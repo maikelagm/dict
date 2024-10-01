@@ -2,8 +2,9 @@ import "@bacons/text-decoder/install";
 
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { TRPCProvider } from "@/utils/api";
 import { useColorScheme } from "nativewind";
+
+import { TRPCProvider } from "@/utils/api";
 
 import "../styles.css";
 
